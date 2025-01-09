@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 
 import '../slidable_widget.dart';
 
-
 const double _kActionsExtentRatio = 0.25;
 const double _kFastThreshold = 2500;
 const double _kDismissThreshold = 0.75;
@@ -620,7 +619,7 @@ class SlidableState extends State<Slidable>
   @override
   bool get wantKeepAlive =>
       !widget.closeOnScroll &&
-      (_overallMoveController.isAnimating == true ||
+      (_overallMoveController.isAnimating ||
           _resizeController?.isAnimating == true);
 
   /// The current actions that have to be shown.
@@ -636,9 +635,8 @@ class SlidableState extends State<Slidable>
     return _directionIsXAxis ? size!.width : size!.height;
   }
 
-  double get _actionsDragAxisExtent {
-    return _overallDragAxisExtent * _totalActionsExtent;
-  }
+  double get _actionsDragAxisExtent =>
+      _overallDragAxisExtent * _totalActionsExtent;
 
   @override
   void didChangeDependencies() {

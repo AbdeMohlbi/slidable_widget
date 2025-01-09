@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'slidable.dart';
 
-
 const bool _kCloseOnTap = true;
 
 /// Abstract class for slide actions that can close after [onTap] occurred.
@@ -181,10 +180,7 @@ class IconSlideAction extends ClosableSlideAction {
     }
 
     return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: widgets,
-      ),
+      child: Column(mainAxisSize: MainAxisSize.min, children: widgets),
     );
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/widgets.dart';
 
 import 'slidable.dart';
 
-
 const Duration _kResizeDuration = Duration(milliseconds: 300);
 
 /// A widget that controls how the [Slidable] is dismissed.
@@ -93,12 +92,10 @@ class SlidableDismissal extends StatelessWidget {
 
     return AnimatedBuilder(
       animation: data.overallMoveAnimation,
-      builder: (BuildContext context, Widget? child) {
-        if (data.overallMoveAnimation.value > data.totalActionsExtent) {
-          return child!;
-        } else {
-          return data.slidable.actionPane;
-        }
+      builder: (__, Widget? child) => switch (
+          data.overallMoveAnimation.value > data.totalActionsExtent) {
+        true => child!,
+        _ => data.slidable.actionPane
       },
       child: child,
     );
@@ -130,9 +127,8 @@ class SlidableDrawerDismissal extends StatelessWidget {
         end: 1 - data.actionExtentRatio * (data.actionCount - index - 1),
       ).animate(
         CurvedAnimation(
-          parent: data.overallMoveAnimation,
-          curve: Interval(data.totalActionsExtent, 1),
-        ),
+            parent: data.overallMoveAnimation,
+            curve: Interval(data.totalActionsExtent, 1)),
       );
     }).toList();
 

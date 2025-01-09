@@ -84,18 +84,12 @@ Widget buildTest(
 }
 
 Offset getOffset(AxisDirection gestureDirection, double value) {
-  switch (gestureDirection) {
-    case AxisDirection.left:
-      return Offset(-value, 0);
-    case AxisDirection.right:
-      return Offset(value, 0);
-    case AxisDirection.up:
-      return Offset(0, -value);
-    case AxisDirection.down:
-      return Offset(0, value);
-    default:
-      fail('unsupported gestureDirection');
-  }
+  return switch (gestureDirection) {
+    AxisDirection.left => Offset(-value, 0),
+    AxisDirection.right => Offset(value, 0),
+    AxisDirection.up => Offset(0, -value),
+    AxisDirection.down => Offset(0, value),
+  };
 }
 
 Future<void> flingElement(
@@ -216,8 +210,6 @@ void checkAction({
       actualEdge = tester.getBottomRight(finder).dy;
       actualExtent = tester.getSize(finder).height;
       break;
-    default:
-      fail('unsupported gestureDirection');
   }
   expect(actualEdge.roundToDouble(), expectedEdge.roundToDouble(),
       reason: 'edges are not'
@@ -272,8 +264,6 @@ List<_CheckActionValues>? getSlidableStrechDelegateHalfValues(
         _CheckActionValues(s0, .2, extentRatio),
         _CheckActionValues(s1, .1, extentRatio),
       ];
-    default:
-      return null;
   }
 }
 
@@ -303,8 +293,6 @@ List<_CheckActionValues>? getSlidableBehindDelegateHalfValues(
         _CheckActionValues(s0, actionExtentRatio * 2, extentRatio),
         _CheckActionValues(s1, actionExtentRatio, extentRatio),
       ];
-    default:
-      return null;
   }
 }
 
@@ -333,8 +321,6 @@ List<_CheckActionValues>? getSlidableScrollDelegateHalfValues(
         _CheckActionValues(s0, actionExtentRatio, extentRatio),
         _CheckActionValues(s1, 0, extentRatio),
       ];
-    default:
-      return null;
   }
 }
 
@@ -363,8 +349,6 @@ List<_CheckActionValues>? getSlidableDrawerDelegateHalfValues(
         _CheckActionValues(s0, actionExtentRatio, extentRatio),
         _CheckActionValues(s1, actionExtentRatio / 2, extentRatio),
       ];
-    default:
-      return null;
   }
 }
 

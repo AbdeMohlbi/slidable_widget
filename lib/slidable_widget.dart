@@ -1,5 +1,3 @@
-library slidable_widget;
-
 export 'widgets/fractionnally_aligned_sized_box.dart';
 export 'widgets/slidable.dart';
 export 'widgets/slidable_dismissal.dart';

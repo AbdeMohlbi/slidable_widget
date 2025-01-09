@@ -2,12 +2,11 @@ import 'package:flutter/widgets.dart';
 
 import 'slidable.dart';
 
-
 class _SlidableStackActionPane extends StatelessWidget {
   _SlidableStackActionPane({
     required this.data,
     required this.child,
-  })   : _animation = Tween<Offset>(
+  }) : _animation = Tween<Offset>(
           begin: Offset.zero,
           end: data.createOffset(data.totalActionsExtent * data.actionSign),
         ).animate(data.actionsMoveAnimation!);
@@ -25,10 +24,7 @@ class _SlidableStackActionPane extends StatelessWidget {
     return Stack(
       children: <Widget>[
         child,
-        SlideTransition(
-          position: _animation,
-          child: data.slidable.child,
-        ),
+        SlideTransition(position: _animation, child: data.slidable.child),
       ],
     );
   }
@@ -43,10 +39,8 @@ class SlidableStrechActionPane extends StatelessWidget {
   Widget build(BuildContext context) {
     final SlidableData data = SlidableData.of(context)!;
 
-    final animation = Tween<double>(
-      begin: 0,
-      end: data.totalActionsExtent,
-    ).animate(data.actionsMoveAnimation!);
+    final animation = Tween<double>(begin: 0, end: data.totalActionsExtent)
+        .animate(data.actionsMoveAnimation!);
 
     return _SlidableStackActionPane(
       data: data,
@@ -112,10 +106,9 @@ class SlidableScrollActionPane extends StatelessWidget {
     final SlidableData data = SlidableData.of(context)!;
 
     final alignment = data.alignment;
-    final animation = Tween<Offset>(
-      begin: Offset(alignment.x, alignment.y),
-      end: Offset.zero,
-    ).animate(data.actionsMoveAnimation!);
+    final animation =
+        Tween<Offset>(begin: Offset(alignment.x, alignment.y), end: Offset.zero)
+            .animate(data.actionsMoveAnimation!);
 
     return _SlidableStackActionPane(
       data: data,

@@ -59,7 +59,6 @@ class FractionallyAlignedSizedBox extends StatelessWidget {
       final left = leftFactor ?? 0;
       final right = rightFactor ?? 0;
       width = 1 - left - right;
-
       if (width != 1) {
         dx = left / (1.0 - width);
       }
@@ -91,10 +90,7 @@ class FractionallyAlignedSizedBox extends StatelessWidget {
     }
 
     return Align(
-      alignment: FractionalOffset(
-        dx,
-        dy,
-      ),
+      alignment: FractionalOffset(dx, dy),
       child: FractionallySizedBox(
         widthFactor: width,
         heightFactor: height,
